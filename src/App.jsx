@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Body from './component/Body'
 
 
 function App() {
@@ -6,7 +7,9 @@ function App() {
 
   return (
     <>
-      <h1 className="text-3xl font-extrabold bg-amber-300 text-white">ggjaajajsbanm</h1>
+    <div>
+      <Body />
+      </div>
     </>
   )
 }
