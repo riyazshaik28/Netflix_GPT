@@ -1,8 +1,21 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { checkvalidData } from "../utils/validation";
 import Header from "./Header";
 const Login = () => {
 
   const [isSignInForm, setisSignInForm] = useState(true);
+
+
+  const[errorMessage,seterrorMessage]=useState(null);
+  const name=useRef(null);
+const email=useRef(null);
+const password=useRef(null);
+
+const handleButtonClick=()=>{
+  const message= checkvalidData(name.current?.value,email.current?.value,password.current?.value);
+  
+   seterrorMessage(message);
+};
 
   const toggleSignInForm=()=>{
 setisSignInForm(!isSignInForm);
@@ -24,31 +37,38 @@ setisSignInForm(!isSignInForm);
       </div>
 
       {/* Login Form */}
-      <form className="absolute w-3/12 min-w-[320px] p-8 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black bg-opacity-50 rounded-xl shadow-xl">
+      <form  onSubmit={(e)=>e.preventDefault()} className="absolute w-3/12 min-w-[320px] p-8 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black bg-opacity-50 rounded-xl shadow-xl">
         <h2 className="text-white text-2xl font-bold mb-6 text-center">{isSignInForm?"Sign In":"Sign Up"}</h2>
          {!isSignInForm && (
   <input
+  ref={name}
     type="text"
     placeholder="Full Name"
     className="w-full p-3 mb-4 rounded bg-gray-100 text-black focus:outline-none focus:ring-2 focus:ring-red-500"
   />
 )}
         <input
+        ref={email}
           type="email"
           placeholder="Email Address"
           className="w-full p-3 mb-4 rounded bg-gray-100 text-black focus:outline-none focus:ring-2 focus:ring-red-500"
         />
 
         <input
+        ref={password}
           type="password"
           placeholder="Password"
           className="w-full p-3 mb-6 rounded bg-gray-100 text-black focus:outline-none focus:ring-2 focus:ring-red-500"
         />
 
+       <p className="text-amber-700 text-l text-center pb-2">{errorMessage}</p>
+
+
         <button
+       
           type="submit"
           className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded"
-        >
+        onClick={handleButtonClick}>
          {isSignInForm?"Sign In":"Sign up"} 
         </button>
         <p className="text-amber-50 font-light text-center m-10 cursor-pointer hover:underline" onClick={toggleSignInForm}>{isSignInForm?"New to Netflix?Sign up now.":"Already registered? sign In now"}</p>
