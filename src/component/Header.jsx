@@ -21,7 +21,7 @@ const Header = () => {
     .then(() => {
 })
 .catch((error) => {
-  // An error happened.
+ 
   navigate("/error");
 });
   };
@@ -34,9 +34,9 @@ const Header = () => {
       addUser({
         uid,
         email,
-        displayName: displayName || "Guest User",   // fallback
+        displayName: displayName || "Guest User",   
         photoURL: photoURL || 
-          DEFAULT_PHOTO, // fallback avatar
+          DEFAULT_PHOTO, 
       })
     );
     navigate("/browser");
